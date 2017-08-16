@@ -1,10 +1,10 @@
 package com.github.karina_denisevich.app.web.controller;
 
+
 import com.github.karina_denisevich.app.common.exception.model.DuplicateEntityException;
 import com.github.karina_denisevich.app.common.exception.model.UserNotFoundException;
 import com.github.karina_denisevich.app.datamodel.Authority;
 import com.github.karina_denisevich.app.datamodel.User;
-import com.github.karina_denisevich.app.git.service.GitRepoService;
 import com.github.karina_denisevich.app.services.UserService;
 import com.github.karina_denisevich.app.web.dto.AbstractDTO;
 import com.github.karina_denisevich.app.web.dto.UserDTO;
@@ -14,18 +14,11 @@ import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.nio.file.AccessDeniedException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,12 +27,17 @@ import java.util.Objects;
 @SuppressWarnings("unchecked")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private final ConversionServiceFactoryBean conversionService;
 
     @Autowired
-    private ConversionServiceFactoryBean conversionService;
+    public UserController(final UserService userService, final ConversionServiceFactoryBean conversionService) {
+        this.userService = userService;
+        this.conversionService = conversionService;
+    }
 
+    //FIXME refactor that, throw exceptions at service layer instead of api layer
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> getById(@PathVariable String userId,

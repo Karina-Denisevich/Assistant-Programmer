@@ -6,8 +6,10 @@ import com.github.karina_denisevich.app.services.AppServices;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
 @SpringBootApplication
+@EnableMongoAuditing
 @Import({
         AppServices.class,
         AppGit.class

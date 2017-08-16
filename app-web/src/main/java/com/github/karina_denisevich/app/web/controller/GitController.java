@@ -1,43 +1,37 @@
 package com.github.karina_denisevich.app.web.controller;
 
-import com.github.karina_denisevich.app.datamodel.Authority;
-import com.github.karina_denisevich.app.datamodel.User;
+
 import com.github.karina_denisevich.app.git.model.GitRepo;
 import com.github.karina_denisevich.app.git.service.GitRepoService;
-import com.github.karina_denisevich.app.web.dto.AbstractDTO;
-import com.github.karina_denisevich.app.web.dto.UserDTO;
-import com.github.karina_denisevich.app.web.dto.UserDTOAdmin;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by Karyna_Dzenisevich on 04-May-17.
- */
 @RestController
 @RequestMapping("/api/git")
 public class GitController {
 
-    @Autowired
-    private GitRepoService gitRepoService;
+    private final GitRepoService gitRepoService;
 
+    public GitController(final GitRepoService gitRepoService) {
+        this.gitRepoService = gitRepoService;
+    }
 
     @RequestMapping(value = "/{repoName}", method = RequestMethod.GET)
-    public ResponseEntity<?> getRepos(@PathVariable String repoName,
-                                 @RequestParam(value = "page", required = false) Integer page,
-                                 @RequestParam(value = "per_page", required = false) Integer perPage,
-                                 @RequestParam(value = "sort", required = false) Boolean isSort) {
+    public ResponseEntity<?> getRepos(@PathVariable final String repoName,
+                                      @RequestParam(value = "page", required = false) final Integer page,
+                                      @RequestParam(value = "per_page", required = false) final Integer perPage,
+                                      @RequestParam(value = "sort", required = false) final Boolean isSort) {
         List<GitRepo> repos = new ArrayList<>();
         try {
             repos = gitRepoService.getGitRepositories(repoName);
@@ -47,7 +41,7 @@ public class GitController {
 
         Integer total = repos.size();
         Integer perPageCopy = perPage == null ? 10 : perPage;
-        if(perPageCopy > total ){
+        if (perPageCopy > total) {
             perPageCopy = total;
         }
         Integer lastPage = (int) Math.ceil((double) total / perPageCopy);

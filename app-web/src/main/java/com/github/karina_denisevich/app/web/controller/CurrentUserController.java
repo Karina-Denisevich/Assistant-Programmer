@@ -1,5 +1,6 @@
 package com.github.karina_denisevich.app.web.controller;
 
+
 import com.github.karina_denisevich.app.datamodel.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class CurrentUserController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getCurrentUser() {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        final User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getDetails();
         return new ResponseEntity<>(currentUser, HttpStatus.OK);
     }
 }

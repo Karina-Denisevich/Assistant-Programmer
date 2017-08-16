@@ -1,5 +1,6 @@
 package com.github.karina_denisevich.app.web.controller;
 
+
 import com.github.karina_denisevich.app.common.exception.model.DuplicateEntityException;
 import com.github.karina_denisevich.app.datamodel.User;
 import com.github.karina_denisevich.app.services.UserService;
@@ -19,19 +20,24 @@ import javax.validation.Valid;
 @RequestMapping("/api/signup")
 public class SignUpController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private final ConversionServiceFactoryBean conversionService;
 
     @Autowired
-    private ConversionServiceFactoryBean conversionService;
+    public SignUpController(final UserService userService, final ConversionServiceFactoryBean conversionService) {
+        this.userService = userService;
+        this.conversionService = conversionService;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> create(@Valid @RequestBody UserDTO userDto) {
+    public ResponseEntity<Object> create(@Valid @RequestBody final UserDTO userDto) {
         if (userService.findByUsername(userDto.getUsername()) != null) {
             throw new DuplicateEntityException("There is also is email " + userDto.getUsername());
         }
+
         User user = (conversionService.getObject().convert(userDto, User.class));
-        userService.create(user);
-        return new ResponseEntity<>(user.getId(), HttpStatus.CREATED);
+
+        return new ResponseEntity<>(userService.create(user).getId(), HttpStatus.CREATED);
     }
 }

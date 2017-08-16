@@ -1,5 +1,6 @@
 package com.github.karina_denisevich.app.web.config;
 
+
 import com.github.karina_denisevich.app.web.converter.dto_to_entity.DtoToUser;
 import com.github.karina_denisevich.app.web.converter.dto_to_entity.DtoToUserAdmin;
 import com.github.karina_denisevich.app.web.converter.entity_to_dto.UserToDto;
@@ -19,14 +20,16 @@ public class ConversionConfig{
 
     @Bean(name = "conversionService")
     public ConversionServiceFactoryBean conversionServiceFactoryBean() {
-        ConversionServiceFactoryBean bean = new ConversionServiceFactoryBean();
+        final ConversionServiceFactoryBean bean = new ConversionServiceFactoryBean();
+
         bean.setConverters(getConverters());
         bean.afterPropertiesSet();
+
         return bean;
     }
 
     private Set<Converter> getConverters() {
-        Set<Converter> converters = new HashSet<>();
+        final Set<Converter> converters = new HashSet<>();
 
         converters.add(new UserToDto());
         converters.add(new DtoToUser());

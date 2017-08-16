@@ -10,14 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>app-git</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${project-lib.version}</version>
 
     <dependencies>
         <dependency>
             <groupId>com.github.karina_denisevich</groupId>
             <artifactId>app-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -29,7 +29,6 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,20 +50,9 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.squareup.retrofit.samples</groupId>-->
-            <!--<artifactId>github-client</artifactId>-->
-            <!--<version>1.9.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.kohsuke</groupId>-->
-            <!--<artifactId>github-api</artifactId>-->
-            <!--<version>1.85</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.eclipse.mylyn.github</groupId>
             <artifactId>org.eclipse.egit.github.core</artifactId>
-            <version>2.1.5</version>
         </dependency>
     </dependencies>
 

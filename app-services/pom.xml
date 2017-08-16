@@ -10,19 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>app-services</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${project-lib.version}</version>
 
     <dependencies>
         <dependency>
             <groupId>com.github.karina_denisevich</groupId>
             <artifactId>app-dao</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.karina_denisevich</groupId>
             <artifactId>app-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -34,7 +33,6 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

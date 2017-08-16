@@ -9,27 +9,23 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <version>${project-lib.version}</version>
     <artifactId>app-web</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
             <groupId>com.github.karina_denisevich</groupId>
             <artifactId>app-services</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.karina_denisevich</groupId>
             <artifactId>app-git</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
-        <!---->
         <dependency>
             <groupId>com.github.karina_denisevich</groupId>
             <artifactId>app-datamodel</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
-        <!---->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
@@ -57,7 +53,6 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -12,6 +12,7 @@
         <module>app-common</module>
         <module>app-services</module>
         <module>app-web</module>
+        <module>app-git</module>
     </modules>
     <packaging>pom</packaging>
     <name>Assistant Programmer</name>

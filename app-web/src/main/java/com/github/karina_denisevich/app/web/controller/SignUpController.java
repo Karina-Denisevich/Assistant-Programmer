@@ -1,5 +1,6 @@
 package com.github.karina_denisevich.app.web.controller;
 
+import com.github.karina_denisevich.app.common.exception.model.DuplicateEntityException;
 import com.github.karina_denisevich.app.datamodel.User;
 import com.github.karina_denisevich.app.services.UserService;
 import com.github.karina_denisevich.app.web.dto.UserDTO;
@@ -26,6 +27,9 @@ public class SignUpController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Object> create(@Valid @RequestBody UserDTO userDto) {
+        if (userService.findByUsername(userDto.getUsername()) != null) {
+            throw new DuplicateEntityException("There is also is email " + userDto.getUsername());
+        }
         User user = (conversionService.getObject().convert(userDto, User.class));
         userService.create(user);
         return new ResponseEntity<>(user.getId(), HttpStatus.CREATED);

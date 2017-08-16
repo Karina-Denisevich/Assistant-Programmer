@@ -1,6 +1,7 @@
 package com.github.karina_denisevich.app.services.impl;
 
 import com.github.karina_denisevich.app.dao.repository.UserRepository;
+import com.github.karina_denisevich.app.datamodel.Authority;
 import com.github.karina_denisevich.app.datamodel.User;
 import com.github.karina_denisevich.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +21,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         user.setCreatedAt(String.valueOf(LocalDateTime.now()));
+        if(user.getAuthorities() == null) {
+            List<Authority> authorities = new ArrayList() {{
+                add(Authority.ROLE_USER);
+            }};
+            user.setAuthorities(authorities);
+        }
         return repository.save(user);
     }
 

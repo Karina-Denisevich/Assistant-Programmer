@@ -1,5 +1,6 @@
 package com.github.karina_denisevich.app.web;
 
+import com.github.karina_denisevich.app.git.ApGit;
 import com.github.karina_denisevich.app.services.ApServices;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +8,8 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @Import({
-        ApServices.class
+        ApServices.class,
+        ApGit.class
 })
 public class Application {
 

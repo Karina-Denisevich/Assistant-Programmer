@@ -1,8 +1,10 @@
 package com.github.karina_denisevich.app.web.controller;
 
+import com.github.karina_denisevich.app.common.exception.model.DuplicateEntityException;
 import com.github.karina_denisevich.app.common.exception.model.UserNotFoundException;
 import com.github.karina_denisevich.app.datamodel.Authority;
 import com.github.karina_denisevich.app.datamodel.User;
+import com.github.karina_denisevich.app.git.service.GitRepoService;
 import com.github.karina_denisevich.app.services.UserService;
 import com.github.karina_denisevich.app.web.dto.AbstractDTO;
 import com.github.karina_denisevich.app.web.dto.UserDTO;
@@ -38,6 +40,7 @@ public class UserController {
     @Autowired
     private ConversionServiceFactoryBean conversionService;
 
+
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> getById(@PathVariable String userId,
                                            @RequestHeader(value = "Custom-Lang", required = false, defaultValue = "en") String language) {
@@ -56,6 +59,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<? extends AbstractDTO>> getAll(@RequestHeader(value = "Custom-Lang", required = false, defaultValue = "en") String language) {
+
         List<User> entities = userService.findAll();
 
         if (CollectionUtils.isEmpty(entities)) {
@@ -75,6 +79,9 @@ public class UserController {
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@Valid @RequestBody UserDTOAdmin userDTOAdmin,
                                     @PathVariable String userId) {
+        if (userService.findByUsername(userDTOAdmin.getUsername()) != null) {
+            throw new DuplicateEntityException("There is also is email " + userDTOAdmin.getUsername());
+        }
         if (!SecurityContextHolder.getContext().getAuthentication()
                 .getAuthorities().contains(Authority.ROLE_ADMIN)) {
             String authorities = "ROLE_USER";

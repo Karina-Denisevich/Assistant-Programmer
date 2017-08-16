@@ -1,0 +1,20 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: project
+
+security:
+  token:
+    secret:
+      key: KLDksffjds8409ufdfjsc9sudjkjcs
+
+git:
+  token: 751a0cb42b866302dfc381846269416dab6aa45a
+
+server:
+ port: 8082
+
+logging:
+  file: ../temp/logs/project-log.log

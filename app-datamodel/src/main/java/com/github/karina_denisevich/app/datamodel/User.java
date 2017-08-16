@@ -1,13 +1,21 @@
 package com.github.karina_denisevich.app.datamodel;
 
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-public class User extends BaseEntity implements UserDetails {
+@Document(collection = "users")
+public class User extends DbModel implements UserDetails {
 
+    private static final long serialVersionUID = -5683495549562424264L;
+
+    @Id
+    private String id;
     private List<Authority> authorities;
     private String username;
     private String password;
@@ -15,6 +23,14 @@ public class User extends BaseEntity implements UserDetails {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean isEnabled;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

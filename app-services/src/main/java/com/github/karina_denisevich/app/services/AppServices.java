@@ -1,5 +1,6 @@
 package com.github.karina_denisevich.app.services;
 
+
 import com.github.karina_denisevich.app.dao.AppDao;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
@@ -8,6 +9,6 @@ import org.springframework.context.annotation.Import;
 @Import({
         AppDao.class
 })
-public class ApServices {
+public class AppServices {
 
 }

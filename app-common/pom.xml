@@ -11,5 +11,4 @@
 
     <artifactId>app-common</artifactId>
     <version>${project-lib.version}</version>
-
 </project>

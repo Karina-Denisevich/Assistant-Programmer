@@ -1,15 +1,16 @@
 package com.github.karina_denisevich.app.web;
 
-import com.github.karina_denisevich.app.git.ApGit;
-import com.github.karina_denisevich.app.services.ApServices;
+
+import com.github.karina_denisevich.app.git.AppGit;
+import com.github.karina_denisevich.app.services.AppServices;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @Import({
-        ApServices.class,
-        ApGit.class
+        AppServices.class,
+        AppGit.class
 })
 public class Application {
 

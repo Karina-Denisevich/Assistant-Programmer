@@ -28,7 +28,6 @@
     <properties>
         <project-lib.version>1.0.0-SNAPSHOT</project-lib.version>
         <commons-collections4.version>4.1</commons-collections4.version>
-        <lombok.version>1.16.18</lombok.version>
         <commons-lang3.version>3.6</commons-lang3.version>
         <guava.version>22.0</guava.version>
         <jjwt.version>0.7.0</jjwt.version>
@@ -94,32 +93,6 @@
                 <groupId>com.github.karina_denisevich</groupId>
                 <artifactId>app-common</artifactId>
                 <version>${project-lib.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aspects</artifactId>
-                <version>3.2.0.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-mongodb</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-aop</artifactId>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>

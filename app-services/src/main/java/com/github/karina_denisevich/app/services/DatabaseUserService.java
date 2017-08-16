@@ -1,44 +1,48 @@
-package com.github.karina_denisevich.app.services.impl;
+package com.github.karina_denisevich.app.services;
+
 
 import com.github.karina_denisevich.app.dao.repository.UserRepository;
 import com.github.karina_denisevich.app.datamodel.Authority;
 import com.github.karina_denisevich.app.datamodel.User;
-import com.github.karina_denisevich.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class DatabaseUserService implements UserService {
+
+    private final UserRepository repository;
 
     @Autowired
-    private UserRepository repository;
+    public DatabaseUserService(final UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
-    public User create(User user) {
-        user.setCreatedAt(String.valueOf(LocalDateTime.now()));
-        if(user.getAuthorities() == null) {
+    public User create(final User user) {
+        if (user.getAuthorities() == null) {
             List<Authority> authorities = new ArrayList() {{
                 add(Authority.ROLE_USER);
             }};
+
             user.setAuthorities(authorities);
         }
+
         return repository.save(user);
     }
 
     @Override
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    public User find(String id) {
+    public User find(final String id) {
         return repository.findOne(id);
     }
 
     //uses only to get user from db
     @Override
-    public User findByUsername(String userName) {
+    public User findByUsername(final String userName) {
         return repository.findByUsername(userName);
     }
 
@@ -50,26 +54,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @PreAuthorize("hasRole('ROLE_ADMIN') or #id == authentication.details.id")
-    public User update(String id, User user) {
+    public User update(final String id, final User user) {
         user.setId(id);
-        User saved = repository.findOne(id);
-        if (saved != null) {
-            user.setCreatedAt(saved.getCreatedAt());
-            user.setUpdatedAt(String.valueOf(LocalDateTime.now()));
-            repository.save(user);
-            return user;
-        } else {
-            user.setId(null);
-            return user;
-        }
+        return repository.save(user);
     }
 
     @Override
-  //  @PreAuthorize("hasRole('ROLE_ADMIN') or #id == authentication.principal.userId")
-    public String delete(String id) {
-        if (repository.findOne(id) == null) {
-            return null;
-        }
+    //  @PreAuthorize("hasRole('ROLE_ADMIN') or #id == authentication.principal.userId")
+    public String delete(final String id) {
         repository.delete(id);
         return id;
     }

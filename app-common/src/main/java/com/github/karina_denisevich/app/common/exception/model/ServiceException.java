@@ -7,18 +7,8 @@ public class ServiceException extends RuntimeException {
 
     private String service;
 
-    public ServiceException(String service) {
-        super();
-        this.service = service;
-    }
-
     public ServiceException(String message, String service) {
         super(message);
-        this.service = service;
-    }
-
-    public ServiceException(String message, Throwable cause, String service) {
-        super(message, cause);
         this.service = service;
     }
 

@@ -5,7 +5,6 @@ import com.github.karina_denisevich.app.datamodel.User;
 
 import java.util.List;
 
-
 public interface UserService {
 
     User create(User object);

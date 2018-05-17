@@ -3,9 +3,11 @@ package com.github.karina_denisevich.app.services;
 
 import com.github.karina_denisevich.app.dao.repository.UserRepository;
 import com.github.karina_denisevich.app.datamodel.Authority;
+import com.github.karina_denisevich.app.datamodel.LinesInfo;
 import com.github.karina_denisevich.app.datamodel.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -60,9 +62,21 @@ public class DatabaseUserService implements UserService {
     }
 
     @Override
-    //  @PreAuthorize("hasRole('ROLE_ADMIN') or #id == authentication.principal.userId")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or #id == authentication.principal.userId")
     public String delete(final String id) {
         repository.delete(id);
         return id;
+    }
+
+    @Override
+    public String saveLinesInfo(LinesInfo linesInfo, String userId) {
+        User user = repository.findOne(userId);
+        boolean found = user.getLinesInfoList().stream().anyMatch(linesInfo::equals);
+
+        if(!found){
+            user.getLinesInfoList().add(linesInfo);
+        }
+        repository.save(user);
+        return "saved";
     }
 }

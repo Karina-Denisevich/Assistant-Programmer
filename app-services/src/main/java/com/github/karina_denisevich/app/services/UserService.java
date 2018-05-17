@@ -1,6 +1,7 @@
 package com.github.karina_denisevich.app.services;
 
 
+import com.github.karina_denisevich.app.datamodel.LinesInfo;
 import com.github.karina_denisevich.app.datamodel.User;
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface UserService {
     User update(String id, User object);
 
     String delete(String id);
+
+    String saveLinesInfo(LinesInfo linesInfo, String userId);
 }

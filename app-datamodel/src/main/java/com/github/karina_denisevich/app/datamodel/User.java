@@ -23,6 +23,7 @@ public class User extends DbModel implements UserDetails {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean isEnabled;
+    private List<LinesInfo> linesInfoList;
 
     public String getId() {
         return id;
@@ -93,5 +94,13 @@ public class User extends DbModel implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         isEnabled = enabled;
+    }
+
+    public List<LinesInfo> getLinesInfoList() {
+        return linesInfoList;
+    }
+
+    public void setLinesInfoList(List<LinesInfo> linesInfoList) {
+        this.linesInfoList = linesInfoList;
     }
 }

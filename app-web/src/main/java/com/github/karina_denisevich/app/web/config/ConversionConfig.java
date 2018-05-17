@@ -1,8 +1,10 @@
 package com.github.karina_denisevich.app.web.config;
 
 
+import com.github.karina_denisevich.app.web.converter.dto_to_entity.DtoToLinesInfo;
 import com.github.karina_denisevich.app.web.converter.dto_to_entity.DtoToUser;
 import com.github.karina_denisevich.app.web.converter.dto_to_entity.DtoToUserAdmin;
+import com.github.karina_denisevich.app.web.converter.entity_to_dto.LinesInfoToDto;
 import com.github.karina_denisevich.app.web.converter.entity_to_dto.UserToDto;
 import com.github.karina_denisevich.app.web.converter.entity_to_dto.UserToDtoAdmin;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +38,9 @@ public class ConversionConfig{
 
         converters.add(new UserToDtoAdmin());
         converters.add(new DtoToUserAdmin());
+
+        converters.add(new LinesInfoToDto());
+        converters.add(new DtoToLinesInfo());
 
         return converters;
     }

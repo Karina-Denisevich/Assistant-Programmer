@@ -4,6 +4,8 @@ import com.github.karina_denisevich.app.datamodel.User;
 import com.github.karina_denisevich.app.web.dto.UserDTO;
 import org.springframework.core.convert.converter.Converter;
 
+import java.util.ArrayList;
+
 @SuppressWarnings("unchecked")
 public class DtoToUser implements Converter<UserDTO, User> {
 
@@ -17,6 +19,7 @@ public class DtoToUser implements Converter<UserDTO, User> {
         user.setCredentialsNonExpired(false);
         user.setEnabled(true);
         user.setAccountNonLocked(true);
+        user.setLinesInfoList(new ArrayList<>());
 
         return user;
     }

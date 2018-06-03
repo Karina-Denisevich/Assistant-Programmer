@@ -73,10 +73,23 @@ public class DatabaseUserService implements UserService {
         User user = repository.findOne(userId);
         boolean found = user.getLinesInfoList().stream().anyMatch(linesInfo::equals);
 
-        if(!found){
+        if (!found) {
             user.getLinesInfoList().add(linesInfo);
         }
         repository.save(user);
         return "saved";
+    }
+
+    @Override
+    public String deleteBookmark(String userId, String bookmarkId) {
+        User user = repository.findOne(userId);
+        for (int i = 0; i < user.getLinesInfoList().size(); i++) {
+            if (user.getLinesInfoList().get(i).getId().equals(bookmarkId)) {
+                user.getLinesInfoList().remove(i);
+                repository.save(user);
+                return bookmarkId;
+            }
+        }
+        return null;
     }
 }

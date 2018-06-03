@@ -12,6 +12,7 @@ public class DtoToLinesInfo implements Converter<LinesInfoDto, LinesInfo> {
     public LinesInfo convert(final LinesInfoDto linesInfoDto) {
         LinesInfo linesInfo = new LinesInfo();
 
+        linesInfo.setId(linesInfoDto.getId());
         linesInfo.setFilePath(linesInfoDto.getFilePath());
         linesInfo.setFirstLine(linesInfoDto.getFirstLine());
         linesInfo.setLastLine(linesInfoDto.getLastLine());

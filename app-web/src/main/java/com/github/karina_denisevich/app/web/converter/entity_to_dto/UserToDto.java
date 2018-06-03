@@ -12,6 +12,7 @@ public class UserToDto implements Converter<User, UserDTO> {
 
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
+        userDto.setLinesInfoDtos(user.getLinesInfoList());
 
         return userDto;
     }

@@ -2,7 +2,7 @@ package com.github.karina_denisevich.app.web.dto;
 
 import java.io.Serializable;
 
-public class LinesInfoDto implements Serializable {
+public class LinesInfoDto extends AbstractDTO implements Serializable {
 
     private static final long serialVersionUID = -5569761957448033790L;
 

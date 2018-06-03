@@ -19,7 +19,7 @@ public class DtoToUser implements Converter<UserDTO, User> {
         user.setCredentialsNonExpired(false);
         user.setEnabled(true);
         user.setAccountNonLocked(true);
-        user.setLinesInfoList(new ArrayList<>());
+        user.setLinesInfoList(userDTO.getLinesInfoDtos() == null ? new ArrayList<>() : userDTO.getLinesInfoDtos());
 
         return user;
     }

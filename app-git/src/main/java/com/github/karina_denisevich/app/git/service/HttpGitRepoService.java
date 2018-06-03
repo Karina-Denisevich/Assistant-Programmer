@@ -2,33 +2,23 @@ package com.github.karina_denisevich.app.git.service;
 
 
 import com.github.karina_denisevich.app.git.model.GitRepo;
-import org.eclipse.egit.github.core.Blob;
 import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryCommit;
 import org.eclipse.egit.github.core.SearchRepository;
-import org.eclipse.egit.github.core.Tree;
-import org.eclipse.egit.github.core.TreeEntry;
 import org.eclipse.egit.github.core.client.GitHubClient;
-import org.eclipse.egit.github.core.client.GitHubRequest;
-import org.eclipse.egit.github.core.service.CommitService;
 import org.eclipse.egit.github.core.service.ContentsService;
 import org.eclipse.egit.github.core.service.DataService;
 import org.eclipse.egit.github.core.service.RepositoryService;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.print.Doc;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_CONTENTS;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
 
 @Service
 public class HttpGitRepoService extends RepositoryService implements GitRepoService {
@@ -65,12 +55,9 @@ public class HttpGitRepoService extends RepositoryService implements GitRepoServ
     public String getGitTree(String owner, String name, String folderName) throws Exception {
         Repository repository = repositoryService.getRepository(owner, name);
 
-
         String webPage = repository.getHtmlUrl() + "/tree/master/" + folderName;
 
-        // String html = Jsoup.connect(webPage).get().html();
         Document document = Jsoup.connect(webPage).get();
-
         refactorDoc(document, owner, name);
 
         return document.html();
@@ -80,44 +67,8 @@ public class HttpGitRepoService extends RepositoryService implements GitRepoServ
     public String getGitFile(String owner, String name, String folderName) throws Exception {
         Repository repository = repositoryService.getRepository(owner, name);
 
-//        CommitService commitService = new CommitService(client);
-//        List<RepositoryCommit> commits = commitService.getCommits(repository);
-//        RepositoryCommit repositoryCommit = commits.get(0);
-//        String headSha = repositoryCommit.getSha();
-//        Tree tree = dataService.getTree(repository, headSha, true);
-//        System.out.println(tree.getUrl());
-//        List<TreeEntry> treeRoot = tree.getTree();
-//
-//
-//        for (TreeEntry treeEntry : treeRoot) {
-//            String path = treeEntry.getPath();
-//        }
-//
-//
-//        String id = getId(repository);
-//        StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
-//        uri.append('/').append(id);
-//        uri.append(SEGMENT_CONTENTS);
-//        uri.append("/").append(name);
-//        GitHubRequest request = createRequest();
-//        request.setUri(uri);
-//        request.setType(Blob.class);
-
-//        if (branch != null) {
-//            Map<String, String> param = new HashMap<String, String>();
-//            param.put("ref", branch);
-//            request.setParams(param);
-//        }
-
-        //Blob b = (Blob) client.get(request).getBody();
-
-
-//        если это файл, то контроллер с ним работает и отдает данные,
-
-
         String webPage = repository.getHtmlUrl() + "/blob/master/" + folderName;
 
-        // String html = Jsoup.connect(webPage).get().html();
         Document document = Jsoup.connect(webPage).get();
 
         refactorDoc(document, owner, name);

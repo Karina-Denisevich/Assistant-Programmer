@@ -20,4 +20,6 @@ public interface UserService {
     String delete(String id);
 
     String saveLinesInfo(LinesInfo linesInfo, String userId);
+
+    String deleteBookmark(String userId, String bookmarkId);
 }

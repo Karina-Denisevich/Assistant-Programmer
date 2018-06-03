@@ -11,7 +11,7 @@ security:
       key: KLDksffjds8409ufdfjsc9sudjkjcs
 
 git:
-  token: 707c22513445e8385625f2ae5aed7b071b8a4eed
+  token: d83fb4a52706ce1400377a7313b47258ed4f6b71
 
 server:
  port: 8082

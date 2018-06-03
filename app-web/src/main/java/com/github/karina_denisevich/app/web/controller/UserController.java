@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
@@ -114,7 +115,7 @@ public class UserController {
     @RequestMapping(value = "/saveLines", method = RequestMethod.POST)
     public ResponseEntity<Object> saveLines(@RequestParam(value = "userId", required = false) final String userId,
                                             @RequestBody final LinesInfoDto linesInfoDto) {
-
+        linesInfoDto.setId(UUID.randomUUID().toString());
         userService.saveLinesInfo(conversionService.getObject().convert(linesInfoDto, LinesInfo.class), userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -125,5 +126,15 @@ public class UserController {
         User user = userService.find(userId);
 
         return new ResponseEntity<>(user.getLinesInfoList(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{userId}/deleteBookmark/{bookmarkId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteBookmark(@PathVariable String bookmarkId, @PathVariable String userId) {
+        String id = userService.deleteBookmark(userId, bookmarkId);
+        if (id == null) {
+            return new ResponseEntity<>("There is no entity with id = " + bookmarkId,
+                    HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
